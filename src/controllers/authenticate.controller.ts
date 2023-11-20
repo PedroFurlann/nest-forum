@@ -11,10 +11,10 @@ import {
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { compare } from 'bcryptjs'
-import { AuthService } from 'src/auth/auth.service'
-import { GoogleAuthGuard } from 'src/auth/google-auth.guard'
-import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe'
-import { PrismaService } from 'src/prisma/prisma.service'
+import { AuthService } from '@/auth/auth.service'
+import { GoogleAuthGuard } from '@/auth/google-auth.guard'
+import { ZodValidationPipe } from '@/pipes/zod-validation.pipe'
+import { PrismaService } from '@/prisma/prisma.service'
 import { z } from 'zod'
 
 const authenticateBodySchema = z.object({
