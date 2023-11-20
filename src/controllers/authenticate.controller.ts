@@ -10,9 +10,9 @@ import {
   UsePipes,
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { AuthGuard } from '@nestjs/passport'
 import { compare } from 'bcryptjs'
 import { AuthService } from 'src/auth/auth.service'
+import { GoogleAuthGuard } from 'src/auth/google-auth.guard'
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe'
 import { PrismaService } from 'src/prisma/prisma.service'
 import { z } from 'zod'
@@ -61,12 +61,12 @@ export class AuthenticateController {
   }
 
   @Get('/google')
-  @UseGuards(AuthGuard('google'))
+  @UseGuards(GoogleAuthGuard)
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   async googleLogin() {}
 
   @Get('/google/callback')
-  @UseGuards(AuthGuard('google'))
+  @UseGuards(GoogleAuthGuard)
   async callback(@Req() req, @Res() res) {
     const jwt = await this.authService.login(req.user)
     res.set('authorization', jwt.access_token)

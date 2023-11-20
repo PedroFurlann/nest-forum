@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
+import { randomUUID } from 'crypto'
 
 @Injectable()
 export class AuthService {
@@ -9,7 +10,7 @@ export class AuthService {
     if (user) {
       return {
         access_token: this.jwtService.sign({
-          sub: user.id,
+          sub: randomUUID(),
         }),
       }
     } else {
