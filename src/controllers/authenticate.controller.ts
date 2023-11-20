@@ -1,12 +1,18 @@
 import {
   Body,
   Controller,
+  Get,
   Post,
+  Req,
+  Res,
   UnauthorizedException,
+  UseGuards,
   UsePipes,
 } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
+import { AuthGuard } from '@nestjs/passport'
 import { compare } from 'bcryptjs'
+import { AuthService } from 'src/auth/auth.service'
 import { ZodValidationPipe } from 'src/pipes/zod-validation.pipe'
 import { PrismaService } from 'src/prisma/prisma.service'
 import { z } from 'zod'
@@ -23,6 +29,7 @@ export class AuthenticateController {
   constructor(
     private readonly jwtService: JwtService,
     private readonly prismaService: PrismaService,
+    private readonly authService: AuthService,
   ) {}
 
   @Post()
@@ -51,5 +58,18 @@ export class AuthenticateController {
     return {
       access_token: accessToken,
     }
+  }
+
+  @Get('/google')
+  @UseGuards(AuthGuard('google'))
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  async googleLogin() {}
+
+  @Get('/google/callback')
+  @UseGuards(AuthGuard('google'))
+  async callback(@Req() req, @Res() res) {
+    const jwt = await this.authService.login(req.user)
+    res.set('authorization', jwt.access_token)
+    res.json(req.user)
   }
 }

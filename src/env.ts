@@ -5,6 +5,8 @@ export const envSchema = z.object({
   JWT_PRIVATE_KEY: z.string(),
   JWT_PUBLIC_KEY: z.string(),
   PORT: z.coerce.number().optional().default(3333),
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_CLIENT_SECRET_KEY: z.string(),
 })
 
 export type Env = z.infer<typeof envSchema>
