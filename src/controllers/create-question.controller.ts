@@ -15,7 +15,7 @@ const bodyValidationPipe = new ZodValidationPipe(createQuestionBodySchema)
 
 type CreateQuestionBodySchemaType = z.infer<typeof createQuestionBodySchema>
 
-@Controller('/question')
+@Controller('/questions')
 @UseGuards(JwtAuthGuard)
 export class CreateQuestionController {
   constructor(private readonly prismaService: PrismaService) {}
