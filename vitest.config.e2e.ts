@@ -8,6 +8,7 @@ export default defineConfig({
     exclude: [...configDefaults.exclude, '**/data/pg/**'],
     globals: true,
     root: './',
+    setupFiles: ['./test/setup-e2e.ts'],
   },
   plugins: [
     swc.vite({
