@@ -6,7 +6,7 @@ import { randomUUID } from 'crypto'
 export class AuthService {
   constructor(private readonly jwtService: JwtService) {}
 
-  async login(user: any) {
+  async login(user: unknown) {
     if (user) {
       return {
         access_token: this.jwtService.sign({
