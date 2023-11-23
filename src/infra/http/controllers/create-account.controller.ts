@@ -6,9 +6,9 @@ import {
   UsePipes,
 } from '@nestjs/common'
 import { hash } from 'bcryptjs'
-import { ZodValidationPipe } from '@/pipes/zod-validation.pipe'
-import { PrismaService } from '@/prisma/prisma.service'
 import { z } from 'zod'
+import { ZodValidationPipe } from '../pipes/zod-validation.pipe'
+import { PrismaService } from '@/infra/database/prisma/prisma.service'
 
 const createAccountBodySchema = z.object({
   name: z.string(),
