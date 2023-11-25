@@ -5,6 +5,7 @@ import { CreateQuestionController } from './controllers/create-question.controll
 import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller'
 import { AuthService } from '../auth/auth.service'
 import { DatabaseModule } from '../database/prisma/database.module'
+import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question'
 
 @Module({
   imports: [DatabaseModule],
@@ -14,6 +15,6 @@ import { DatabaseModule } from '../database/prisma/database.module'
     CreateQuestionController,
     FetchRecentQuestionsController,
   ],
-  providers: [AuthService],
+  providers: [CreateQuestionUseCase, AuthService],
 })
 export class HttpModule {}
