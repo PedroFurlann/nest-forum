@@ -2,7 +2,7 @@ import { SpyInstance, beforeEach, describe, expect, it, vi } from 'vitest'
 import { OnAnswerCreated } from './on-answer-created'
 import { makeAnswer } from '../../../../../test/factories/make-answer'
 import { InMemoryAnswersRepository } from '../../../../../test/repositories/in-memory-answers-repository'
-import { InMemoryAnswerAttachmentsRepository } from '../../../../../test/repositories/in-memmory-answer-attachments-repository'
+import { InMemoryAnswerAttachmentsRepository } from '../../../../../test/repositories/in-memory-answer-attachments-repository'
 import { InMemoryQuestionsRepository } from '../../../../../test/repositories/in-memory-questions-repository'
 import { InMemoryQuestionAttachmentsRepository } from '../../../../../test/repositories/in-memory-question-attachments-repository'
 import {
@@ -10,7 +10,7 @@ import {
   CreateNotificationUseCaseRequest,
   CreateNotificationUseCaseResponse,
 } from '../use-cases/create-notification'
-import { InMemoryNotificationsRepository } from '../../../../../test/repositories/in-memmory-notifications-repository'
+import { InMemoryNotificationsRepository } from '../../../../../test/repositories/in-memory-notifications-repository'
 import { makeQuestion } from '../../../../../test/factories/make-question'
 import { waitFor } from '../../../../../test/utils/wait-for'
 

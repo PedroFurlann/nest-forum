@@ -6,7 +6,7 @@ import {
   CreateNotificationUseCaseRequest,
   CreateNotificationUseCaseResponse,
 } from '../use-cases/create-notification'
-import { InMemoryNotificationsRepository } from '../../../../../test/repositories/in-memmory-notifications-repository'
+import { InMemoryNotificationsRepository } from '../../../../../test/repositories/in-memory-notifications-repository'
 import { makeQuestion } from '../../../../../test/factories/make-question'
 import { waitFor } from '../../../../../test/utils/wait-for'
 import { OnQuestionCommentCreated } from './on-question-comment-create'

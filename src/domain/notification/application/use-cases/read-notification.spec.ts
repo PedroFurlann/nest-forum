@@ -1,6 +1,6 @@
 import { expect, it, beforeEach, describe } from 'vitest'
 import { ReadNotificationUseCase } from './read-notification'
-import { InMemoryNotificationsRepository } from '../../../../../test/repositories/in-memmory-notifications-repository'
+import { InMemoryNotificationsRepository } from '../../../../../test/repositories/in-memory-notifications-repository'
 import { makeNotification } from '../../../../../test/factories/make-notification'
 import { UniqueEntityID } from '../../../../core/entities/unique-entity-id'
 import { NotAllowedError } from '../../../../core/errors/errors/not-allowed-error'

@@ -3,7 +3,7 @@ import { InMemoryAnswersRepository } from '../../../../../test/repositories/in-m
 import { makeAnswer } from '../../../../../test/factories/make-answer'
 import { InMemoryAnswerCommentsRepository } from '../../../../../test/repositories/in-memory-answer-comments-repository'
 import { CommentOnAnswerUseCase } from './comment-on.answer'
-import { InMemoryAnswerAttachmentsRepository } from '../../../../../test/repositories/in-memmory-answer-attachments-repository'
+import { InMemoryAnswerAttachmentsRepository } from '../../../../../test/repositories/in-memory-answer-attachments-repository'
 
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository

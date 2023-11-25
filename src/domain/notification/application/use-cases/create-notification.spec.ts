@@ -1,6 +1,6 @@
 import { expect, it, beforeEach, describe } from 'vitest'
 import { CreateNotificationUseCase } from './create-notification'
-import { InMemoryNotificationsRepository } from '../../../../../test/repositories/in-memmory-notifications-repository'
+import { InMemoryNotificationsRepository } from '../../../../../test/repositories/in-memory-notifications-repository'
 
 let inMemoryNotificationsRepository: InMemoryNotificationsRepository
 let sut: CreateNotificationUseCase
