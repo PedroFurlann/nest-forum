@@ -10,12 +10,13 @@ import {
   UseGuards,
   UsePipes,
 } from '@nestjs/common'
-import { GoogleAuthGuard } from '@/infra/auth/google-auth.guard'
 import { z } from 'zod'
 import { AuthService } from '@/infra/auth/auth.service'
 import { ZodValidationPipe } from '../pipes/zod-validation.pipe'
 import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student'
 import { WrongCredentialsError } from '@/domain/forum/application/use-cases/errors/wrong-credentials-error'
+import { GoogleAuthGuard } from '@/infra/auth/google-auth.guard'
+import { Public } from '@/infra/auth/public'
 
 const authenticateBodySchema = z.object({
   email: z.string().email(),
@@ -25,6 +26,7 @@ const authenticateBodySchema = z.object({
 type AuthenticateBodySchemaType = z.infer<typeof authenticateBodySchema>
 
 @Controller('/sessions')
+@Public()
 export class AuthenticateController {
   constructor(
     private readonly authenticateStudentService: AuthenticateStudentUseCase,
