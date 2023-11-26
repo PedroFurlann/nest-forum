@@ -24,7 +24,7 @@ type AuthenticateBodySchemaType = z.infer<typeof authenticateBodySchema>
 @Controller('/sessions')
 export class AuthenticateController {
   constructor(
-    private readonly authenticateStudent: AuthenticateStudentUseCase,
+    private readonly authenticateStudentService: AuthenticateStudentUseCase,
     private readonly authService: AuthService,
   ) {}
 
@@ -33,7 +33,7 @@ export class AuthenticateController {
   async handle(@Body() body: AuthenticateBodySchemaType) {
     const { email, password } = body
 
-    const result = await this.authenticateStudent.execute({
+    const result = await this.authenticateStudentService.execute({
       email,
       password,
     })
