@@ -1,16 +1,13 @@
 import { Injectable } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
 import { Strategy, VerifyCallback } from 'passport-google-oauth20'
-import { Env } from '@/infra/env'
+import { EnvService } from '../env/env.service'
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy) {
-  constructor(config: ConfigService<Env, true>) {
-    const googleClientId = config.get('GOOGLE_CLIENT_ID', { infer: true })
-    const googleClientSecretKey = config.get('GOOGLE_CLIENT_SECRET_KEY', {
-      infer: true,
-    })
+  constructor(env: EnvService) {
+    const googleClientId = env.get('GOOGLE_CLIENT_ID')
+    const googleClientSecretKey = env.get('GOOGLE_CLIENT_SECRET_KEY')
 
     super({
       clientID: googleClientId,
