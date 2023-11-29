@@ -9,7 +9,7 @@ import { CurrentUser } from '@/infra/auth/current-user.decorator'
 import { UserPayload } from '@/infra/auth/jwt.strategy'
 import { ChooseQuestionBestAnswerUseCase } from '@/domain/forum/application/use-cases/choose-question-best-answer'
 
-@Controller('/answer/:answerId/choose-as-best')
+@Controller('/answers/:answerId/choose-as-best')
 export class ChooseQuestionBestAnswerController {
   constructor(
     private readonly chooseQuestionBestAnswerUseCase: ChooseQuestionBestAnswerUseCase,
