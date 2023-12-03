@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { randomUUID } from 'crypto'
+import { randomUUID } from 'node:crypto'
 
 @Injectable()
 export class AuthService {
