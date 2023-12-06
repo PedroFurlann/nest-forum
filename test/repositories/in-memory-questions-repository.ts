@@ -1,14 +1,19 @@
+import { QuestionDetails } from '@/domain/forum/enterprise/entities/value-objects/question-details'
 import { DomainEvents } from '../../src/core/events/domain-events'
 import { PaginationParams } from '../../src/core/repositories/pagination-params'
-import { QuestionAttachmentsRepository } from '../../src/domain/forum/application/repositories/question-attachments-repository'
 import { QuestionRepository } from '../../src/domain/forum/application/repositories/question-repository'
 import { Question } from '../../src/domain/forum/enterprise/entities/question'
+import { InMemoryAttachmentsRepository } from './in-memory-attachments-repository'
+import { InMemoryQuestionAttachmentsRepository } from './in-memory-question-attachments-repository'
+import { InMemoryStudentsRepository } from './in-memory-students-repository'
 
 export class InMemoryQuestionsRepository implements QuestionRepository {
   public items: Question[] = []
 
   constructor(
-    private questionAttachmentsRepository: QuestionAttachmentsRepository,
+    private questionAttachmentsRepository: InMemoryQuestionAttachmentsRepository,
+    private attachmentsRepository: InMemoryAttachmentsRepository,
+    private studentsRepository: InMemoryStudentsRepository,
   ) {}
 
   async findManyRecent({ page }: PaginationParams) {
@@ -73,5 +78,58 @@ export class InMemoryQuestionsRepository implements QuestionRepository {
     }
 
     return question
+  }
+
+  async findDetailsBySlug(slug: string) {
+    const question = this.items.find((item) => item.slug.value === slug)
+
+    if (!question) {
+      return null
+    }
+
+    const author = this.studentsRepository.items.find((student) => {
+      return student.id.equals(question.authorId)
+    })
+
+    if (!author) {
+      throw new Error(
+        `Author with ID "${question.authorId.toString()}" does not exist`,
+      )
+    }
+
+    const questionAttachments = this.questionAttachmentsRepository.items.filter(
+      (questionAttachment) => {
+        return questionAttachment.questionId.equals(question.id)
+      },
+    )
+
+    const attachments = questionAttachments.map((questionAttachment) => {
+      const attachment = this.attachmentsRepository.items.find(
+        (attachement) => {
+          return attachement.id.equals(questionAttachment.attachmentId)
+        },
+      )
+
+      if (!attachment) {
+        throw new Error(
+          `Attachment with ID "${questionAttachment.attachmentId.toString()}" does not exist`,
+        )
+      }
+
+      return attachment
+    })
+
+    return QuestionDetails.create({
+      questionId: question.id,
+      title: question.title,
+      content: question.content,
+      slug: question.slug,
+      bestAnswerId: question.bestAnswerId,
+      attachments,
+      authorId: author.id,
+      authorName: author.name,
+      createdAt: question.createdAt,
+      updatedAt: question.updatedAt,
+    })
   }
 }
